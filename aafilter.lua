@@ -1,16 +1,16 @@
 _addon.version = '0.0.2'
 _addon.name = 'aafilter'
 _addon.author = 'yyoshisaur'
-_addon.commands = {'aafilter'}
+_addon.commands = { 'aafilter' }
 
 require('sets')
 
-filters = S{
-            windower.to_shift_jis('*の攻撃*'),
-            windower.to_shift_jis('追加ダメージ*'),
-        }
+filters = S {
+    windower.to_shift_jis('*の攻撃*'),
+    windower.to_shift_jis('追加ダメージ*'),
+}
 
-filter_mode = S{20,21,25,26,32,33,40,41,163,164,185,186,}
+filter_mode = S { 20, 21, 25, 26, 32, 33, 40, 41, 163, 164, 185, 186, }
 --[[
     20:自身の攻撃
     21:自身の攻撃失敗
@@ -29,7 +29,6 @@ filter_mode = S{20,21,25,26,32,33,40,41,163,164,185,186,}
 ]]
 
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
-
     if filter_mode:contains(original_mode) then
         for filter in filters:it() do
             if windower.wc_match(original, filter) then
